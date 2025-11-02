@@ -1,10 +1,11 @@
 import { api, instance } from '@/api/instance'
-import type { AuthResponse, LoginRequest, RegisterRequest } from '@/api/types'
+import type { LoginRequest, RegisterRequest } from '@/api/types'
 
 export const register = async (data: RegisterRequest, recaptcha?: string) =>
 	await api
-		.post<AuthResponse>('/auth/register', data, {
-			headers: recaptcha ? { recaptcha } : undefined
+		.post('/auth/register', data, {
+			headers: recaptcha ? { recaptcha } : undefined,
+			withCredentials: true
 		})
 		.then(res => {
 			return res.data
@@ -12,8 +13,9 @@ export const register = async (data: RegisterRequest, recaptcha?: string) =>
 
 export const login = async (data: LoginRequest, recaptcha?: string) =>
 	await api
-		.post<AuthResponse>('/auth/login', data, {
-			headers: recaptcha ? { recaptcha } : undefined
+		.post('/auth/login', data, {
+			headers: recaptcha ? { recaptcha } : undefined,
+			withCredentials: true
 		})
 		.then(res => {
 			return res.data
