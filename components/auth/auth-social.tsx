@@ -19,7 +19,7 @@ export default function AuthSocial() {
 	const onClick = async (provider: 'google' | 'yandex') => {
 		const response = await mutateAsync(provider)
 		if (response) {
-			router.push(response.data.url)
+			router.push(response.url)
 		}
 	}
 

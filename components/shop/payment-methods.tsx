@@ -1,7 +1,7 @@
 import React from 'react'
 import { Control } from 'react-hook-form'
 
-import { InitPaymentFormValues } from '@/components/shop/payment-modal'
+import { InitPaymentFormValues } from '@/components/modals/payment-modal'
 import { FormControl, FormField, FormItem } from '@/components/ui/form'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
