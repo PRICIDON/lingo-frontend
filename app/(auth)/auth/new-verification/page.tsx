@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import NewVerification from '@/components/auth/new-verification'
 
@@ -8,5 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function NewVerificationPage() {
-	return <NewVerification />
+	return (
+		<Suspense>
+			<NewVerification />
+		</Suspense>
+	)
 }
