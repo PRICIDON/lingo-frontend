@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import NewPasswordForm from '@/components/auth/new-password-form'
 
@@ -8,5 +8,9 @@ export const metadata: Metadata = {
 }
 
 export default function ResetPasswordPage() {
-	return <NewPasswordForm />
+	return (
+		<Suspense>
+			<NewPasswordForm />
+		</Suspense>
+	)
 }
