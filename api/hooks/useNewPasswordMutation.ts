@@ -4,21 +4,14 @@ import { newPassword } from '@/api/requests/auth'
 
 export function useNewPasswordMutation(
 	options?: Omit<
-		UseMutationOptions<any, unknown, { data: any; recaptcha: string }>,
+		UseMutationOptions<any, unknown, { data: any }>,
 		'mutationKey' | 'mutationFn'
 	>
 ) {
 	return useMutation({
 		mutationKey: ['new password'],
-		mutationFn: ({
-			data,
-			token,
-			recaptcha
-		}: {
-			data: any
-			token: string | null
-			recaptcha: string
-		}) => newPassword(data, token, recaptcha),
+		mutationFn: ({ data, token }: { data: any; token: string | null }) =>
+			newPassword(data, token),
 		...options
 	})
 }

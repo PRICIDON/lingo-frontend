@@ -4,14 +4,13 @@ import { resetPassword } from '@/api/requests/auth'
 
 export function useResetPasswordMutation(
 	options?: Omit<
-		UseMutationOptions<any, unknown, { data: any; recaptcha: string }>,
+		UseMutationOptions<any, unknown, any>,
 		'mutationKey' | 'mutationFn'
 	>
 ) {
 	return useMutation({
 		mutationKey: ['reset password'],
-		mutationFn: ({ data, recaptcha }: { data: any; recaptcha: string }) =>
-			resetPassword(data, recaptcha),
+		mutationFn: (data: any) => resetPassword(data),
 		...options
 	})
 }

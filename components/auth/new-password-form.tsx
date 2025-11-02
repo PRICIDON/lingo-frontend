@@ -2,8 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, useSearchParams } from 'next/navigation'
-import React, { useState } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
@@ -34,7 +33,6 @@ const newPasswordSchema = z.object({
 export type NewPasswordFormValues = z.infer<typeof newPasswordSchema>
 
 export default function NewPasswordForm() {
-	const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	const token = searchParams.get('token')
@@ -58,11 +56,7 @@ export default function NewPasswordForm() {
 	})
 
 	const onSubmit = (values: NewPasswordFormValues) => {
-		if (recaptchaValue) {
-			mutate({ data: values, token, recaptcha: recaptchaValue })
-		} else {
-			toast.error('Пожалуйста, завершите reCAPTCHA')
-		}
+		mutate({ data: values, token })
 	}
 
 	return (
@@ -96,14 +90,7 @@ export default function NewPasswordForm() {
 							</FormItem>
 						)}
 					/>
-					<div className='flex justify-center'>
-						<ReCAPTCHA
-							sitekey={
-								process.env.GOOGLE_RECAPTCHA_SITE_KEY as string
-							}
-							onChange={setRecaptchaValue}
-						/>
-					</div>
+
 					<Button
 						variant='secondary'
 						type='submit'

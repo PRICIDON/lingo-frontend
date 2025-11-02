@@ -2,10 +2,8 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
+import React from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'sonner'
 import { z } from 'zod'
 
 import { useRegisterMutation } from '@/api/hooks/useRegisterMutation'
@@ -46,7 +44,6 @@ const registerSchema = z
 export type RegisterFormValues = z.infer<typeof registerSchema>
 
 export default function RegisterForm() {
-	const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null)
 	const router = useRouter()
 	const { mutate, isPending } = useRegisterMutation({
 		onSuccess(data: any) {
@@ -69,11 +66,7 @@ export default function RegisterForm() {
 	})
 
 	const onSubmit = (values: RegisterFormValues) => {
-		if (recaptchaValue) {
-			mutate({ data: values, recaptcha: recaptchaValue })
-		} else {
-			toast.error('Пожалуйста, завершите reCAPTCHA')
-		}
+		mutate(values)
 	}
 
 	return (
@@ -160,14 +153,6 @@ export default function RegisterForm() {
 							</FormItem>
 						)}
 					/>
-					<div className='flex justify-center'>
-						<ReCAPTCHA
-							sitekey={
-								process.env.GOOGLE_RECAPTCHA_SITE_KEY as string
-							}
-							onChange={setRecaptchaValue}
-						/>
-					</div>
 					<Button
 						variant='secondary'
 						type='submit'

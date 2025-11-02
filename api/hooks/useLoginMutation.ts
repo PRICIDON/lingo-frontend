@@ -5,23 +5,13 @@ import type { AuthResponse, LoginRequest } from '@/api/types'
 
 export function useLoginMutation(
 	options?: Omit<
-		UseMutationOptions<
-			AuthResponse,
-			unknown,
-			{ data: LoginRequest; recaptcha: string }
-		>,
+		UseMutationOptions<AuthResponse, unknown, LoginRequest>,
 		'mutationKey' | 'mutationFn'
 	>
 ) {
 	return useMutation({
 		mutationKey: ['login'],
-		mutationFn: ({
-			data,
-			recaptcha
-		}: {
-			data: LoginRequest
-			recaptcha: string
-		}) => login(data, recaptcha),
+		mutationFn: (data: LoginRequest) => login(data),
 		...options
 	})
 }
