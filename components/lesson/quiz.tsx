@@ -40,16 +40,16 @@ export default function Quiz({
 
 	useEffect(() => {
 		if (!userProgress || !userSubscription) redirect('/learn')
-	}, [])
+	}, [userProgress, userSubscription])
 
 	const [isOpenHeartModal, setIsOpenHeartModal] = useState(false)
 	const [isOpenPracticeModal, setIsOpenPracticeModal] = useState(false)
 
-	useMount(() => {
+	useEffect(() => {
 		if (initialPercentage === 100) {
 			setIsOpenPracticeModal(true)
 		}
-	})
+	}, [])
 
 	const [correctAudio, _c, correctControls] = useAudio({
 		src: '/correct.wav'
