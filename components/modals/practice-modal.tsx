@@ -31,11 +31,12 @@ export default function PracticeModal({ isOpen, onClose }: PracticeModalProps) {
 						/>
 					</div>
 					<DialogTitle className='text-center text-2xl font-bold'>
-						Practice lesson
+						Практический урок
 					</DialogTitle>
 					<DialogDescription className='text-center text-base'>
-						Use practice lessons to regain hearts and points. You
-						cannot loose hearts or points in practice lessons.
+						Используйте практические уроки, чтобы повторить
+						пройденный материал. Вы не можете потерять сердца на
+						практических уроках
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter className='mb-4'>
@@ -46,7 +47,7 @@ export default function PracticeModal({ isOpen, onClose }: PracticeModalProps) {
 							size='lg'
 							onClick={onClose}
 						>
-							I understand
+							Я понял
 						</Button>
 					</div>
 				</DialogFooter>

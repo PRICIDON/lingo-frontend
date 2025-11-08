@@ -25,10 +25,10 @@ export default function Quests() {
 	return (
 		<div className='space-y-4 rounded-xl border-2 p-4'>
 			<div className='flex w-full items-center justify-between space-y-2'>
-				<h3 className='text-lg font-bold'>Quests</h3>
+				<h3 className='text-lg font-bold'>Квесты</h3>
 				<Link href='/quests'>
 					<Button size='sm' variant='primaryOutline'>
-						View all
+						Посмотреть все
 					</Button>
 				</Link>
 			</div>
@@ -65,10 +65,10 @@ function QuestSkeleton() {
 	return (
 		<div className='space-y-4 rounded-xl border-2 p-4'>
 			<div className='flex w-full items-center justify-between space-y-2'>
-				<h3 className='text-lg font-bold'>Quests</h3>
+				<h3 className='text-lg font-bold'>Квесты</h3>
 				<Link href='/quests'>
 					<Button size='sm' variant='primaryOutline'>
-						View all
+						Посмотреть все
 					</Button>
 				</Link>
 			</div>

@@ -39,10 +39,11 @@ export default function HeartsModal({ isOpen, onClose }: HeartModalProps) {
 						/>
 					</div>
 					<DialogTitle className='text-center text-2xl font-bold'>
-						You ran out of hearts!
+						У вас закончились сердца!
 					</DialogTitle>
 					<DialogDescription className='text-center text-base'>
-						Get Pro for unlimited hearts, or purchase them in store
+						Оформите подписку Lingo Plus и получите неограниченное
+						количество сердец или купите их в магазине.
 					</DialogDescription>
 				</DialogHeader>
 				<DialogFooter className='mb-4'>
@@ -53,7 +54,7 @@ export default function HeartsModal({ isOpen, onClose }: HeartModalProps) {
 							size='lg'
 							onClick={onClick}
 						>
-							Get unlimited hearts
+							Получить неограниченное количество сердец
 						</Button>
 						<Button
 							variant='primaryOutline'
@@ -61,7 +62,7 @@ export default function HeartsModal({ isOpen, onClose }: HeartModalProps) {
 							size='lg'
 							onClick={onClose}
 						>
-							No thanks
+							Нет, спасибо
 						</Button>
 					</div>
 				</DialogFooter>

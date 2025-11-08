@@ -28,7 +28,7 @@ export default function Header() {
 				<SignedOut>
 					<Link href='/auth/login'>
 						<Button variant='ghost' size='lg'>
-							Login
+							Войти
 						</Button>
 					</Link>
 				</SignedOut>

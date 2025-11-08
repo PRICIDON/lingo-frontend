@@ -122,7 +122,7 @@ export default function Quiz({
 					},
 					onError(err) {
 						console.error(err)
-						toast.error('Something went wrong. Please try again')
+						toast.error('Что-то пошло не так. Попробуйте еще раз')
 					}
 				}
 			)
@@ -145,7 +145,7 @@ export default function Quiz({
 					},
 					onError(err) {
 						console.error(err)
-						toast.error('Something went wrong. Please try again')
+						toast.error('Что-то пошло не так. Попробуйте еще раз.')
 					}
 				}
 			)
@@ -165,7 +165,7 @@ export default function Quiz({
 
 	const title =
 		challenge.type === 'ASSIST'
-			? 'Select the correct meaning'
+			? 'Выберите правильный ответ'
 			: challenge.question
 
 	return (
@@ -183,7 +183,7 @@ export default function Quiz({
 						<h1 className='text-center text-lg font-bold text-neutral-700 lg:text-start lg:text-3xl'>
 							{title}
 						</h1>
-						<div className=''>
+						<div>
 							{challenge.type === 'ASSIST' && (
 								<QuestionBubble question={challenge.question} />
 							)}

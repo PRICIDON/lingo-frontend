@@ -27,15 +27,17 @@ export default function Promo() {
 						height={26}
 						width={26}
 					/>
-					<h3 className='text-lg font-bold'>Upgrade to Pro</h3>
+					<h3 className='text-lg font-bold'>
+						Обновиться до Lingo Plus
+					</h3>
 				</div>
 				<p className='text-muted-foreground'>
-					Get unlimited hearts and more!
+					Получить неограниченное количество сердец и многое другое!
 				</p>
 			</div>
 			<Link href='/shop'>
 				<Button variant='super' className='w-full' size='lg'>
-					Upgrade today
+					Обновиться сейчас
 				</Button>
 			</Link>
 		</div>

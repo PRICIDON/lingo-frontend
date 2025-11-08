@@ -13,7 +13,7 @@ export default function Home() {
 			</div>
 			<div className='flex flex-col items-center gap-y-8'>
 				<h1 className='max-w-[480px] text-center text-xl font-bold text-neutral-600 lg:text-3xl'>
-					Learn, practice, and master new languages with Lingo.
+					Изучайте, практикуйте и осваивайте новые языки с Lingo.
 				</h1>
 				<div className='flex w-full max-w-[330px] flex-col items-center gap-y-3'>
 					<SignedOut>
@@ -22,7 +22,7 @@ export default function Home() {
 							variant='secondary'
 							className='w-full'
 						>
-							<Link href='/auth/register'>Get Started</Link>
+							<Link href='/auth/register'>Начать</Link>
 						</Button>
 						<Button
 							size='lg'
@@ -30,7 +30,7 @@ export default function Home() {
 							className='w-full'
 						>
 							<Link href='/auth/login'>
-								I already have an account
+								У меня уже есть аккаунт
 							</Link>
 						</Button>
 					</SignedOut>
@@ -41,7 +41,7 @@ export default function Home() {
 							className='w-full'
 							asChild
 						>
-							<Link href='/learn'>Continue Learning</Link>
+							<Link href='/learn'>Продолжить обучение</Link>
 						</Button>
 					</SignedIn>
 				</div>

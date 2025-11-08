@@ -39,10 +39,10 @@ export default function QuestsPage() {
 						height={90}
 					/>
 					<h1 className='my-6 text-center text-2xl font-bold text-neutral-800'>
-						Quests
+						Квесты
 					</h1>
 					<p className='text-muted-foreground mb-6 text-center text-lg'>
-						Complete quests by earning points
+						Выполняйте задания, зарабатывая очки
 					</p>
 					<ul className='w-full'>
 						{quests.map(quest => {

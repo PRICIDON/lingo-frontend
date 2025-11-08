@@ -30,11 +30,11 @@ export default async function LeaderboardPage() {
 						height={90}
 					/>
 					<h1 className='my-6 text-center text-2xl font-bold text-neutral-800'>
-						Leaderboard
+						Доска лидеров
 					</h1>
 					<p className='text-muted-foreground mb-6 text-center text-lg'>
-						See where you stand among other learners in the
-						community.
+						Смотрите, какое место вы занимаете среди других
+						участников сообщества.
 					</p>
 					<Separator className='mb-4 h-0.5 rounded-full' />
 					{leaderboard?.map((userProgress, i) => (

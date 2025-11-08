@@ -39,7 +39,7 @@ export default function Items({
 			{
 				onError(err) {
 					console.error(err)
-					toast.error('Something went wrong!')
+					toast.error('Что-то пошло не так!')
 				}
 			}
 		)
@@ -66,7 +66,7 @@ export default function Items({
 					/>
 					<div className='flex-1'>
 						<p className='text-base font-bold text-neutral-700 lg:text-xl'>
-							Refill hearts
+							Восстановить сердца
 						</p>
 					</div>
 					<Button
@@ -78,7 +78,7 @@ export default function Items({
 						}
 					>
 						{hearts === 5 ? (
-							'full'
+							'Макс.'
 						) : (
 							<div className='flex items-center'>
 								<Image
@@ -101,7 +101,7 @@ export default function Items({
 					/>
 					<div className='flex-1'>
 						<p className='text-base font-bold text-neutral-700 lg:text-xl'>
-							Unlimited Hearts
+							Неограниченное количество сердец
 						</p>
 					</div>
 					<Button
@@ -112,7 +112,7 @@ export default function Items({
 								: openSetting
 						}
 					>
-						{hasActiveSubscription ? 'settings' : 'upgrade'}
+						{hasActiveSubscription ? 'Настройки' : 'Обновиться'}
 					</Button>
 				</div>
 			</ul>

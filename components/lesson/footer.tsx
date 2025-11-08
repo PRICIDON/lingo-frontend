@@ -34,13 +34,13 @@ export default function Footer({
 				{status === 'correct' && (
 					<div className='flex items-center text-base font-bold text-green-500 lg:text-2xl'>
 						<CheckCircle className='mr-4 size-6 lg:size-10' />
-						Nicely done!
+						Отлично сделано!
 					</div>
 				)}
 				{status === 'wrong' && (
 					<div className='flex items-center text-base font-bold text-rose-500 lg:text-2xl'>
 						<XCircle className='mr-4 size-6 lg:size-10' />
-						Try again.
+						Попробуй еще раз.
 					</div>
 				)}
 				{status === 'completed' && (
@@ -51,7 +51,7 @@ export default function Footer({
 							(window.location.href = `/lesson/${lessonId}`)
 						}
 					>
-						Practice again
+						Попрактиковаться еще раз.
 					</Button>
 				)}
 				<Button
@@ -61,10 +61,10 @@ export default function Footer({
 					size={isMobile ? 'sm' : 'lg'}
 					variant={status === 'wrong' ? 'danger' : 'secondary'}
 				>
-					{status === 'none' && 'Check'}
-					{status === 'correct' && 'Next'}
-					{status === 'wrong' && 'Retry'}
-					{status === 'completed' && 'Continue'}
+					{status === 'none' && 'Проверить'}
+					{status === 'correct' && 'Продолжить'}
+					{status === 'wrong' && 'Еще раз'}
+					{status === 'completed' && 'Продолжить'}
 				</Button>
 			</div>
 		</footer>

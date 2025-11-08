@@ -27,7 +27,7 @@ export default function LearnPage() {
 
 	if (isLoading) return <Loading />
 
-	if (!courseProgress || !units) return null
+	if (!courseProgress || !units || !lessonPercentage) return null
 
 	return (
 		<div className='flex flex-row-reverse gap-[48px] px-6'>
@@ -45,7 +45,7 @@ export default function LearnPage() {
 							title={unit.title}
 							lessons={unit.lessons!}
 							activeLesson={courseProgress.activeLesson}
-							activeLessonPercentage={lessonPercentage!}
+							activeLessonPercentage={lessonPercentage}
 						/>
 					</div>
 				))}

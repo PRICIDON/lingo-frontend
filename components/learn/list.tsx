@@ -33,7 +33,7 @@ export default function List({ courses }: ListProps) {
 					router.push('/learn')
 				},
 				onError(err) {
-					toast.error('Something went wrong!')
+					toast.error('Что-то пошло не так!')
 					console.error(err)
 				}
 			}

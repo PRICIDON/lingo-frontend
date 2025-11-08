@@ -43,10 +43,10 @@ export default function ShopPage() {
 				<div className='flex w-full flex-col items-center'>
 					<Image src='/shop.svg' alt='Shop' width={90} height={90} />
 					<h1 className='my-6 text-center text-2xl font-bold text-neutral-800'>
-						Shop
+						Магазин
 					</h1>
 					<p className='text-muted-foreground mb-6 text-center text-lg'>
-						Spend your points on cool stuff.
+						Тратьте свои баллы на интересные вещи.
 					</p>
 					<Items
 						hearts={userProgress?.hearts}
