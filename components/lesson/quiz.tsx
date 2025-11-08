@@ -1,7 +1,7 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import { redirect } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 import { useAudio, useMount } from 'react-use'
 import { toast } from 'sonner'
 
@@ -30,7 +30,6 @@ export default function Quiz({
 	initialLessonId,
 	initialLessonChallenges
 }: QuizProps) {
-	const router = useRouter()
 	const { data: userProgress, isLoading: isLoadingUserProgress } =
 		useGetUserProgressQuery()
 	const { data: userSubscription, isLoading: isLoadingUserSubscription } =
@@ -39,7 +38,9 @@ export default function Quiz({
 
 	if (isLoading) return <div>Loading...</div>
 
-	if (!userProgress || !userSubscription) router.push('/learn')
+	useEffect(() => {
+		if (!userProgress || !userSubscription) redirect('/learn')
+	}, [])
 
 	const [isOpenHeartModal, setIsOpenHeartModal] = useState(false)
 	const [isOpenPracticeModal, setIsOpenPracticeModal] = useState(false)
