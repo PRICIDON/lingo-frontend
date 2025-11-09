@@ -5,7 +5,7 @@ import SignedIn from '@/components/auth/signed-in'
 import SignedOut from '@/components/auth/signed-out'
 import { Button } from '@/components/ui/button'
 
-export default function Home() {
+export default async function Home() {
 	return (
 		<div className='mx-auto flex w-full max-w-[988px] flex-1 flex-col items-center justify-center gap-2 p-4 lg:flex-row'>
 			<div className='relative mb-8 size-[240px] lg:mb-0 lg:size-[424px]'>
