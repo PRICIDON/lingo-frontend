@@ -5,8 +5,7 @@ import React from 'react'
 
 import { useGetLessonByIdQuery } from '@/api/hooks/useGetLessonByIdQuery'
 
-import Quiz from '@/components/lesson/quiz'
-import Loading from '@/components/loading'
+import Quiz, { QuizSkeleton } from '@/components/lesson/quiz'
 
 interface Props {
 	lessonId: string
@@ -15,7 +14,7 @@ interface Props {
 export default function LessonId({ lessonId }: Props) {
 	const { data: lesson, isLoading } = useGetLessonByIdQuery(lessonId)
 
-	if (isLoading) return <Loading />
+	if (isLoading) return <QuizSkeleton />
 
 	if (!lesson) redirect('/learn')
 

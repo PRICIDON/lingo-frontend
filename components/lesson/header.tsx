@@ -44,3 +44,22 @@ export default function Header({
 		</>
 	)
 }
+
+export function HeaderSkeleton() {
+	return (
+		<header className='mx-auto flex w-full max-w-[1140px] items-center justify-between gap-x-7 px-10 pt-5 lg:pt-[50px]'>
+			<X className='cursor-pointer text-slate-500 transition hover:opacity-75' />
+			<Progress value={0} />
+			<div className='flex items-center font-bold text-rose-500'>
+				<Image
+					src='/heart.svg'
+					height={28}
+					width={28}
+					alt='Heart'
+					className='mr-2'
+				/>
+				0
+			</div>
+		</header>
+	)
+}

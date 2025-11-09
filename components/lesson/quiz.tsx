@@ -1,8 +1,8 @@
 'use client'
 
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { useAudio, useMount } from 'react-use'
+import { useAudio } from 'react-use'
 import { toast } from 'sonner'
 
 import { useGetUserProgressQuery } from '@/api/hooks/useGetUserProgressQuery'
@@ -11,13 +11,14 @@ import { useReduceHeartsMutation } from '@/api/hooks/useReduceHeartsMutation'
 import { useUpsertChallengeProgressMutation } from '@/api/hooks/useUpsertChallengeProgressMutation'
 import { type ChallengeResponse } from '@/api/types'
 
-import Challenge from '@/components/lesson/challenge'
+import Challenge, { ChallengeSkeleton } from '@/components/lesson/challenge'
 import Finish from '@/components/lesson/finish'
-import Footer from '@/components/lesson/footer'
-import Header from '@/components/lesson/header'
+import Footer, { FooterSkeleton } from '@/components/lesson/footer'
+import Header, { HeaderSkeleton } from '@/components/lesson/header'
 import QuestionBubble from '@/components/lesson/question-bubble'
 import HeartsModal from '@/components/modals/hearts-modal'
 import PracticeModal from '@/components/modals/practice-modal'
+import { Skeleton } from '@/components/ui/skeleton'
 
 interface QuizProps {
 	initialPercentage: number
@@ -30,62 +31,76 @@ export default function Quiz({
 	initialLessonId,
 	initialLessonChallenges
 }: QuizProps) {
+	const router = useRouter()
+
+	// --- Queries ---
 	const { data: userProgress, isLoading: isLoadingUserProgress } =
 		useGetUserProgressQuery()
 	const { data: userSubscription, isLoading: isLoadingUserSubscription } =
 		useGetUserSubscriptionQuery()
+
 	const isLoading = isLoadingUserProgress || isLoadingUserSubscription
-
-	if (isLoading) return <div>Loading...</div>
-
-	useEffect(() => {
-		if (!userProgress || !userSubscription) redirect('/learn')
-	}, [userProgress, userSubscription])
-
-	const [isOpenHeartModal, setIsOpenHeartModal] = useState(false)
-	const [isOpenPracticeModal, setIsOpenPracticeModal] = useState(false)
-
-	useEffect(() => {
-		if (initialPercentage === 100) {
-			setIsOpenPracticeModal(true)
-		}
-	}, [])
-
+	// --- Audio hooks ---
 	const [correctAudio, _c, correctControls] = useAudio({
 		src: '/correct.wav'
 	})
+
 	const [incorrectAudio, _i, incorrectControls] = useAudio({
 		src: '/incorrect.wav'
 	})
-	const { mutate: mutateReduceHearts, isPending: isPendingReduceHearts } =
-		useReduceHeartsMutation()
-	const {
-		mutate: mutateChallengeProgress,
-		isPending: isPendingUpsertChallengeProgress
-	} = useUpsertChallengeProgressMutation()
-	const isPending = isPendingReduceHearts || isPendingUpsertChallengeProgress
+	// --- State hooks ---
 
-	const [lessonId] = useState(initialLessonId)
-	const [hearts, setHearts] = useState<number>(userProgress?.hearts!)
-	const [percentage, setPercentage] = useState(() => {
-		return initialPercentage === 100 ? 0 : initialPercentage
-	})
-	const [challenges, _] = useState(initialLessonChallenges)
+	const [isOpenHeartModal, setIsOpenHeartModal] = useState(false)
+
+	const [isOpenPracticeModal, setIsOpenPracticeModal] = useState(
+		initialPercentage === 100
+	)
+
+	const [hearts, setHearts] = useState<number>(userProgress?.hearts ?? 0)
+
+	const [percentage, setPercentage] = useState(
+		initialPercentage === 100 ? 0 : initialPercentage
+	)
+
+	const challenges = initialLessonChallenges
+
 	const [activeIndex, setActiveIndex] = useState(() => {
 		const uncompletedIndex = challenges.findIndex(
 			challenge => !challenge.completed
 		)
 		return uncompletedIndex === -1 ? 0 : uncompletedIndex
 	})
+
+	const [selectedOption, setSelectedOption] = useState<string>()
+
+	const [status, setStatus] = useState<'correct' | 'wrong' | 'none'>('none')
+
+	const { mutate: mutateReduceHearts, isPending: isPendingReduceHearts } =
+		useReduceHeartsMutation()
+
+	const {
+		mutate: mutateChallengeProgress,
+		isPending: isPendingUpsertChallengeProgress
+	} = useUpsertChallengeProgressMutation()
+
+	const isPending = isPendingReduceHearts || isPendingUpsertChallengeProgress
+
+	const lessonId = initialLessonId
 	const challenge = challenges[activeIndex]
 	const options = challenge?.challengeOptions ?? []
 
+	useEffect(() => {
+		if (!isLoading && (!userProgress || !userSubscription))
+			router.push('/learn')
+	}, [userProgress, userSubscription, isLoading])
+	useEffect(() => {
+		if (userProgress?.hearts != null) setHearts(userProgress.hearts)
+	}, [])
+
+	// --- Handlers ---
 	const onNext = () => {
 		setActiveIndex(current => current + 1)
 	}
-
-	const [selectedOption, setSelectedOption] = useState<string>()
-	const [status, setStatus] = useState<'correct' | 'wrong' | 'none'>('none')
 
 	const onSelect = (id: string) => {
 		if (status !== 'none') return
@@ -148,23 +163,36 @@ export default function Quiz({
 					},
 					onError(err) {
 						console.error(err)
-						toast.error('Что-то пошло не так. Попробуйте еще раз.')
+						toast.error('Что-то пошло не так. Попробуйте еще раз')
 					}
 				}
 			)
 		}
 	}
-
-	if (!challenge) {
+	// --- Loading ---
+	if (isLoading)
 		return (
-			<Finish
-				challenges={challenges}
-				hearts={hearts}
-				lessonId={lessonId}
-				hasActiveSubscription={!!userSubscription?.isActive}
-			/>
+			<>
+				{incorrectAudio}
+				{correctAudio}
+				<QuizSkeleton />
+			</>
 		)
-	}
+
+	// --- Finish ---
+	if (!challenge)
+		return (
+			<>
+				{incorrectAudio}
+				{correctAudio}
+				<Finish
+					challenges={challenges}
+					hearts={hearts}
+					lessonId={lessonId}
+					hasActiveSubscription={!!userSubscription?.isActive}
+				/>
+			</>
+		)
 
 	const title =
 		challenge.type === 'ASSIST'
@@ -202,19 +230,41 @@ export default function Quiz({
 					</div>
 				</div>
 			</div>
+
 			<Footer
 				disabled={isPending || !selectedOption}
 				status={status}
 				onCheck={onContinue}
 			/>
+
 			<HeartsModal
 				isOpen={isOpenHeartModal}
 				onClose={() => setIsOpenHeartModal(false)}
 			/>
+
 			<PracticeModal
 				isOpen={isOpenPracticeModal}
 				onClose={() => setIsOpenPracticeModal(false)}
 			/>
+		</>
+	)
+}
+
+export function QuizSkeleton() {
+	return (
+		<>
+			<HeaderSkeleton />
+			<div className='flex-1'>
+				<div className='flex h-full items-center justify-center'>
+					<div className='flex w-full flex-col gap-y-12 px-6 lg:min-h-[350px] lg:w-[600px] lg:px-0'>
+						<Skeleton className='h-10 w-full' />
+						<div>
+							<ChallengeSkeleton />
+						</div>
+					</div>
+				</div>
+			</div>
+			<FooterSkeleton />
 		</>
 	)
 }

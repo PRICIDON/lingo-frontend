@@ -2,8 +2,12 @@ import React from 'react'
 
 import type { GetLessonResponse } from '@/api/types'
 
-import LessonButton from '@/components/learn/unit/lesson-button'
-import UnitBanner from '@/components/learn/unit/unit-banner'
+import LessonButton, {
+	LessonButtonSkeleton
+} from '@/components/learn/unit/lesson-button'
+import UnitBanner, {
+	UnitBannerSkeleton
+} from '@/components/learn/unit/unit-banner'
 
 interface UnitProps {
 	title: string
@@ -40,6 +44,19 @@ export default function Unit({
 						/>
 					)
 				})}
+			</div>
+		</>
+	)
+}
+
+export function UnitSkeleton() {
+	return (
+		<>
+			<UnitBannerSkeleton />
+			<div className='relative flex flex-col items-center'>
+				{Array.from({ length: 5 }).map((_, i) => (
+					<LessonButtonSkeleton key={i} index={i} totalCount={5} />
+				))}
 			</div>
 		</>
 	)

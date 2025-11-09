@@ -4,6 +4,8 @@ import { useAudio, useKey } from 'react-use'
 
 import { ChallengeResponseType } from '@/api/types'
 
+import { Skeleton } from '@/components/ui/skeleton'
+
 import { cn } from '@/lib/utils'
 
 interface CardProps {
@@ -93,6 +95,20 @@ export default function Card({
 				>
 					{shortcut}
 				</div>
+			</div>
+		</div>
+	)
+}
+
+export function CardSkeleton() {
+	return (
+		<div className='h-full rounded-xl border-2 border-b-4 p-4 lg:p-6'>
+			<div className='relative mb-4 aspect-square max-h-[80px] w-full lg:max-h-[150px]'>
+				<Skeleton className='h-full w-full rounded-lg' />
+			</div>
+			<div className='flex items-center justify-between'>
+				<Skeleton className='h-3.5 w-20 rounded-sm lg:h-4' />
+				<Skeleton className='flex size-[20px] items-center justify-center rounded-lg text-xs font-semibold lg:size-[30px] lg:text-[15px]' />
 			</div>
 		</div>
 	)

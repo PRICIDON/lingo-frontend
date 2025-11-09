@@ -72,7 +72,7 @@ export function LoginForm() {
 			bottomText='Еще нет аккаунта?'
 			bottomTextLink='Регистрация'
 			bottomLinkHref='/auth/register'
-			isShowSocial
+			isShowSocial={!isShowTwoFactor}
 		>
 			<Form {...form}>
 				<form

@@ -119,3 +119,52 @@ export default function LessonButton({
 		</Link>
 	)
 }
+
+export function LessonButtonSkeleton({
+	index,
+	totalCount
+}: {
+	index: number
+	totalCount: number
+}) {
+	const cycleLength = 8
+	const cycleIndex = index % cycleLength
+
+	let indentationLevel
+
+	if (cycleIndex <= 2) {
+		indentationLevel = cycleIndex
+	} else if (cycleIndex <= 4) {
+		indentationLevel = 4 - cycleIndex
+	} else if (cycleIndex <= 6) {
+		indentationLevel = 4 - cycleIndex
+	} else {
+		indentationLevel = cycleIndex - 8
+	}
+
+	const rightPosition = indentationLevel * 40
+
+	const isFirst = index === 0
+	const isLast = index === totalCount
+
+	const Icon = isLast ? Crown : Star
+
+	return (
+		<div
+			className='relative'
+			style={{
+				right: `${rightPosition}px`,
+				marginTop: isFirst ? 60 : 24
+			}}
+		>
+			<Button
+				size='rounded'
+				variant='locked'
+				className='size-[70px] border-b-8'
+				disabled
+			>
+				<Icon className='size-10 fill-neutral-400 stroke-neutral-400 text-neutral-400' />
+			</Button>
+		</div>
+	)
+}

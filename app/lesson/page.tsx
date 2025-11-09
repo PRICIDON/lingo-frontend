@@ -5,13 +5,12 @@ import React from 'react'
 
 import { useGetLessonQuery } from '@/api/hooks/useGetLessonQuery'
 
-import Quiz from '@/components/lesson/quiz'
-import Loading from '@/components/loading'
+import Quiz, { QuizSkeleton } from '@/components/lesson/quiz'
 
 export default function LessonPage() {
 	const { data: lesson, isLoading } = useGetLessonQuery()
 
-	if (isLoading) return <Loading />
+	if (isLoading) return <QuizSkeleton />
 
 	if (!lesson) redirect('/learn')
 

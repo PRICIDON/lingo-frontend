@@ -5,6 +5,7 @@ import {
 	ReduceHeartsRequest,
 	UpdateAutoRenewalRequest,
 	UpdateAutoRenewalResponse,
+	UpdateUserRequest,
 	UserSubscriptionResponse
 } from '@/api/types'
 
@@ -34,3 +35,6 @@ export const toggleAutoRenewal = async (data: UpdateAutoRenewalRequest) =>
 	await instance
 		.patch<UpdateAutoRenewalResponse>('/users/@me/auto-renewal', data)
 		.then(res => res.data)
+
+export const updateProfile = async (data: UpdateUserRequest) =>
+	await instance.patch('/users/@me', data)

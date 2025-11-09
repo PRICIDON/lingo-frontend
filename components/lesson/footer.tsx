@@ -40,7 +40,7 @@ export default function Footer({
 				{status === 'wrong' && (
 					<div className='flex items-center text-base font-bold text-rose-500 lg:text-2xl'>
 						<XCircle className='mr-4 size-6 lg:size-10' />
-						Попробуй еще раз.
+						Попробуй еще раз
 					</div>
 				)}
 				{status === 'completed' && (
@@ -65,6 +65,24 @@ export default function Footer({
 					{status === 'correct' && 'Продолжить'}
 					{status === 'wrong' && 'Еще раз'}
 					{status === 'completed' && 'Продолжить'}
+				</Button>
+			</div>
+		</footer>
+	)
+}
+
+export function FooterSkeleton() {
+	const isMobile = useMedia('(max-width: 1024px)')
+	return (
+		<footer className='h-[100px] border-t-2 lg:h-[140px]'>
+			<div className='mx-auto flex h-full max-w-[1140px] items-center justify-between px-6 lg:px-10'>
+				<Button
+					disabled
+					className='ml-auto'
+					size={isMobile ? 'sm' : 'lg'}
+					variant='secondary'
+				>
+					Проверить
 				</Button>
 			</div>
 		</footer>

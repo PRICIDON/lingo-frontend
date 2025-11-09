@@ -68,7 +68,7 @@ export default function PaymentHistory() {
 	if (isLoading) return <PaymentHistorySkeleton />
 
 	return (
-		<Card className='border-0 shadow-xs'>
+		<Card className='border-0'>
 			<CardHeader>
 				<div className='flex items-center justify-between'>
 					<CardTitle className='text-lg font-semibold'>

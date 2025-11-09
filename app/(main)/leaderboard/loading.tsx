@@ -1,25 +1,19 @@
 import Image from 'next/image'
 import React from 'react'
 
-import { getTopTenUsers } from '@/api/requests/users'
-
-import Promo from '@/components/learn/promo'
-import Quests from '@/components/learn/quests'
-import UserProgress from '@/components/learn/user-progress'
-import { Avatar, AvatarImage } from '@/components/ui/avatar'
+import { QuestSkeleton } from '@/components/learn/quests'
+import { UserProgressSkeleton } from '@/components/learn/user-progress'
 import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
 import FeedWrapper from '@/components/wrappers/feed-wrapper'
 import StickyWrapper from '@/components/wrappers/sticky-wrapper'
 
-export default async function LeaderboardPage() {
-	const leaderboard = await getTopTenUsers()
-
+export default function Loading() {
 	return (
 		<div className='flex flex-row-reverse gap-12 px-6'>
 			<StickyWrapper>
-				<UserProgress />
-				<Promo />
-				<Quests />
+				<UserProgressSkeleton />
+				<QuestSkeleton />
 			</StickyWrapper>
 			<FeedWrapper>
 				<div className='flex w-full flex-col items-center'>
@@ -37,26 +31,21 @@ export default async function LeaderboardPage() {
 						участников сообщества.
 					</p>
 					<Separator className='mb-4 h-0.5 rounded-full' />
-					{leaderboard.map((userProgress, i) => (
+					{Array.from({ length: 10 }).map((_, i) => (
 						<div
 							className='flex w-full items-center rounded-xl p-2 px-4 hover:bg-gray-200/50'
-							key={userProgress.userId}
+							key={i}
 						>
 							<p className='mr-4 font-bold text-lime-700'>
 								{i + 1}
 							</p>
-							<Avatar className='mr-6 ml-3 size-12 border bg-green-500'>
-								<AvatarImage
-									className='object-cover'
-									src={userProgress.user.imageSrc}
-								/>
-							</Avatar>
-							<p className='flex-1 font-bold text-neutral-800'>
-								{userProgress.user.name}
-							</p>
-							<p className='text-muted-foreground'>
-								{userProgress.points} XP
-							</p>
+							<div className='mr-6 ml-3 size-12'>
+								<Skeleton className='bg-muted flex size-full items-center justify-center rounded-full' />
+							</div>
+							<div className='flex-1'>
+								<Skeleton className='h-4 w-30' />
+							</div>
+							<p className='text-muted-foreground'>0 XP</p>
 						</div>
 					))}
 				</div>

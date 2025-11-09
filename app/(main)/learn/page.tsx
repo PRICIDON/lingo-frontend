@@ -6,12 +6,13 @@ import { useGetCourseProgressQuery } from '@/api/hooks/useGetCourseProgressQuery
 import { useGetLessonPercentageQuery } from '@/api/hooks/useGetLessonPercentageQuery'
 import { useGetUnitsQuery } from '@/api/hooks/useGetUnitsQuery'
 
-import Header from '@/components/learn/header'
+import Header, { HeaderSkeleton } from '@/components/learn/header'
 import Promo from '@/components/learn/promo'
-import Quests from '@/components/learn/quests'
-import Unit from '@/components/learn/unit/unit'
-import UserProgress from '@/components/learn/user-progress'
-import Loading from '@/components/loading'
+import Quests, { QuestSkeleton } from '@/components/learn/quests'
+import Unit, { UnitSkeleton } from '@/components/learn/unit/unit'
+import UserProgress, {
+	UserProgressSkeleton
+} from '@/components/learn/user-progress'
 import FeedWrapper from '@/components/wrappers/feed-wrapper'
 import StickyWrapper from '@/components/wrappers/sticky-wrapper'
 
@@ -25,9 +26,9 @@ export default function LearnPage() {
 	const isLoading =
 		isLoadingUnits || isLoadingCourseProgress || isLoadingLessonPercentage
 
-	if (isLoading) return <Loading />
+	if (isLoading) return <LearnPageSkeleton />
 
-	if (!courseProgress || !units || !lessonPercentage) return null
+	if (!courseProgress || !units) return null
 
 	return (
 		<div className='flex flex-row-reverse gap-[48px] px-6'>
@@ -45,8 +46,27 @@ export default function LearnPage() {
 							title={unit.title}
 							lessons={unit.lessons!}
 							activeLesson={courseProgress.activeLesson}
-							activeLessonPercentage={lessonPercentage}
+							activeLessonPercentage={lessonPercentage ?? 0}
 						/>
+					</div>
+				))}
+			</FeedWrapper>
+		</div>
+	)
+}
+
+function LearnPageSkeleton() {
+	return (
+		<div className='flex flex-row-reverse gap-[48px] px-6'>
+			<StickyWrapper>
+				<UserProgressSkeleton />
+				<QuestSkeleton />
+			</StickyWrapper>
+			<FeedWrapper>
+				<HeaderSkeleton />
+				{Array.from({ length: 1 }).map((_, i) => (
+					<div key={i} className='mb-10'>
+						<UnitSkeleton />
 					</div>
 				))}
 			</FeedWrapper>

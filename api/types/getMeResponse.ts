@@ -18,4 +18,6 @@ export interface GetMeResponse {
   subscription?: SubscriptionResponse;
   /** Source User Avatar */
   imageSrc: string;
+  /** Whether two factor is enabled */
+  isTwoFactorEnabled: boolean;
 }

@@ -10,4 +10,6 @@ export interface UpdateUserRequest {
   name: string;
   /** Email address of the user */
   email: string;
+  /** Enable or disable two factor */
+  isTwoFactorEnabled: boolean;
 }

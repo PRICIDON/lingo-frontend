@@ -52,7 +52,7 @@ export default function Finish({
 					width={50}
 				/>
 				<h1 className='text-xl font-bold text-neutral-700 lg:text-3xl'>
-					Great job! <br /> You&apos;ve completed the lesson.
+					Хорошая работа! <br /> Вы завершили этот урок.
 				</h1>
 				<div className='flex w-full items-center gap-x-4'>
 					<ResultCard

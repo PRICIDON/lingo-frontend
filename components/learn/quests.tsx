@@ -61,7 +61,7 @@ export default function Quests() {
 	)
 }
 
-function QuestSkeleton() {
+export function QuestSkeleton() {
 	return (
 		<div className='space-y-4 rounded-xl border-2 p-4'>
 			<div className='flex w-full items-center justify-between space-y-2'>

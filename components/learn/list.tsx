@@ -8,7 +8,7 @@ import { useGetUserProgressQuery } from '@/api/hooks/useGetUserProgressQuery'
 import { useUpsertUserProgressMutation } from '@/api/hooks/useUpsertUserProgressMutation'
 import { GetCourseResponse } from '@/api/types'
 
-import Card from '@/components/learn/card'
+import Card, { CardSkeleton } from '@/components/learn/card'
 
 interface ListProps {
 	courses: GetCourseResponse[]
@@ -52,6 +52,16 @@ export default function List({ courses }: ListProps) {
 					disabled={isPending}
 					active={id === userProgress?.activeCourseId}
 				/>
+			))}
+		</div>
+	)
+}
+
+export function ListSkeleton() {
+	return (
+		<div className='grid grid-cols-2 gap-4 pt-6 lg:grid-cols-[repeat(auto-fill,minmax(210px,1fr))]'>
+			{Array.from({ length: 3 }).map((_, i) => (
+				<CardSkeleton key={i} />
 			))}
 		</div>
 	)

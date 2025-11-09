@@ -126,3 +126,43 @@ export default function Items({
 		</>
 	)
 }
+
+export function ItemsSkeleton() {
+	return (
+		<ul className='w-full'>
+			<div className='flex w-full items-center gap-x-4 border-t-2 p-4'>
+				<Image src='/heart.svg' alt='Heart' width={60} height={60} />
+				<div className='flex-1'>
+					<p className='text-base font-bold text-neutral-700 lg:text-xl'>
+						Восстановить сердца
+					</p>
+				</div>
+				<Button disabled={true}>
+					<div className='flex items-center'>
+						<Image
+							src='/points.svg'
+							alt='Points'
+							height={20}
+							width={20}
+						/>
+						<p>{POINTS_TO_REFILL}</p>
+					</div>
+				</Button>
+			</div>
+			<div className='flex w-full items-center gap-x-4 border-t-2 p-4 pt-8'>
+				<Image
+					src='/unlimited.svg'
+					alt='Unlimited Heart'
+					width={60}
+					height={60}
+				/>
+				<div className='flex-1'>
+					<p className='text-base font-bold text-neutral-700 lg:text-xl'>
+						Неограниченное количество сердец
+					</p>
+				</div>
+				<Button disabled={true}>Обновиться</Button>
+			</div>
+		</ul>
+	)
+}

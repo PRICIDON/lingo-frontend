@@ -25,7 +25,7 @@ export default function SubscriptionCard({
 	children
 }: SubscriptionCardProps) {
 	return (
-		<Card className='gap-0 border-0 shadow-xs'>
+		<Card className='gap-0 border-0'>
 			<CardHeader>
 				<CardTitle className='text-lg'>Подписка</CardTitle>
 			</CardHeader>

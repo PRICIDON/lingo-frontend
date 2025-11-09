@@ -1,8 +1,14 @@
+import { Metadata } from 'next'
 import React from 'react'
 
 import DashboardHeader from '@/components/settings/header'
 import PaymentHistory from '@/components/settings/payment-history'
+import SettingsForm from '@/components/settings/settings-form'
 import SubscriptionInfo from '@/components/settings/subscription-info'
+
+export const metadata: Metadata = {
+	title: 'Настройки профиля'
+}
 
 export default function SettingsPage() {
 	return (
@@ -18,6 +24,7 @@ export default function SettingsPage() {
 						<PaymentHistory />
 					</div>
 				</div>
+				<SettingsForm />
 			</div>
 		</div>
 	)

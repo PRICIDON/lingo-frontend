@@ -71,7 +71,7 @@ export default function UserProgress() {
 	)
 }
 
-function UserProgressSkeleton() {
+export function UserProgressSkeleton() {
 	return (
 		<div className='flex w-full items-center justify-between gap-x-2'>
 			<Skeleton className='h-11 w-16 rounded-xl' />

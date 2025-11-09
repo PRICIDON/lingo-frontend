@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ChallengeOptionResponse, ChallengeResponseType } from '@/api/types'
 
-import Card from '@/components/lesson/card'
+import Card, { CardSkeleton } from '@/components/lesson/card'
 
 import { cn } from '@/lib/utils'
 
@@ -26,10 +26,9 @@ export default function Challenge({
 	return (
 		<div
 			className={cn(
-				'grid gap-2',
-				type === 'ASSIST'
-					? 'grid-cols-1'
-					: 'grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]'
+				'grid grid-cols-1 gap-2',
+				type !== 'ASSIST' &&
+					'md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]'
 			)}
 		>
 			{options.map((option, index) => (
@@ -45,6 +44,16 @@ export default function Challenge({
 					disabled={disabled}
 					type={type}
 				/>
+			))}
+		</div>
+	)
+}
+
+export function ChallengeSkeleton() {
+	return (
+		<div className='grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(0,1fr))]'>
+			{Array.from({ length: 3 }).map((_, i) => (
+				<CardSkeleton key={i} />
 			))}
 		</div>
 	)
