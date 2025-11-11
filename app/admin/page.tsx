@@ -36,7 +36,10 @@ const httpClient = (url: string, options: fetchUtils.Options = {}) => {
 	return fetchUtils.fetchJson(url, options)
 }
 
-const dataProvider = simpleRestProvider('http://localhost:4000', httpClient)
+const dataProvider = simpleRestProvider(
+	process.env.NEXT_PUBLIC_API_BASE_URL!,
+	httpClient
+)
 
 export default function AdminApp() {
 	const router = useRouter()

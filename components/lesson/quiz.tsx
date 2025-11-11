@@ -56,7 +56,7 @@ export default function Quiz({
 		initialPercentage === 100
 	)
 
-	const [hearts, setHearts] = useState<number>(userProgress?.hearts ?? 0)
+	const [hearts, setHearts] = useState<number>(userProgress?.hearts! ?? 0)
 
 	const [percentage, setPercentage] = useState(
 		initialPercentage === 100 ? 0 : initialPercentage
